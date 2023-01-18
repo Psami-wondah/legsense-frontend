@@ -1,0 +1,2 @@
+export const BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
+export const SOCKET_TOKEN = process.env.NEXT_PUBLIC_SOCKET_TOKEN as string;
