@@ -18,15 +18,15 @@ const Guage = ({ value, color, max = 1023 }: GuageProps) => {
         progress={getProgress(value)}
         text={String(value)}
         fillColor={color}
-        size={130}
-        textStyle={{ size: "20px", font: "Rubik" }}
+        size={90}
+        textStyle={{ size: "15px", font: "Rubik" }}
         customText={[
           {
-            text: "0       1023",
-            x: 65,
-            y: 100,
+            text: "0     1023",
+            x: 45,
+            y: 79,
             font: "Rubik",
-            size: "12px",
+            size: "5px",
           },
         ]}
       />

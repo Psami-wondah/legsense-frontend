@@ -1,6 +1,5 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
-import * as echarts from "echarts";
 import { TableData } from "./table";
 import moment from "moment";
 interface Props {

@@ -7,6 +7,7 @@ import { useSocketIO } from "../hooks/socket.hook";
 import Table from "../components/table";
 import moment from "moment";
 import BasicChart from "../components/chart";
+import { number } from "echarts";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -109,6 +110,28 @@ export default function Home() {
 
   const { socket } = useSocketIO(setSensorDataList);
 
+  const guageColor = (guageValue: number) => {
+    if (guageValue > 900) {
+      return "#ff0000";
+    } else if (guageValue > 800) {
+      return "#ff8400";
+    } else if (guageValue > 700) {
+      return "#ffd900";
+    } else if (guageValue > 600) {
+      return "#ffff00";
+    } else if (guageValue > 500) {
+      return "#c8ff00";
+    } else if (guageValue > 400) {
+      return "#00ff1a";
+    } else if (guageValue > 300) {
+      return "#00f2ff";
+    } else if (guageValue > 200) {
+      return "#00aeff";
+    } else if (guageValue > 100) {
+      return "#0044ff";
+    } else return "#c0cbe9";
+  };
+
   return (
     <>
       <Head>
@@ -118,43 +141,64 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className=" grid grid-cols-12">
-        <div className=" col-span-12 lg:col-span-4">
+        <div className=" col-span-12 lg:col-span-3">
           <div className=" grid grid-cols-3 gap-y-10 pt-24 font-rubik ">
             <div className="w-max mx-auto">
               <p className=" text-center">T1</p>
-              <Guage value={Number(sensorData.T1)} color={"#880808"} />
+              <Guage
+                value={Number(sensorData.T1)}
+                color={guageColor(Number(sensorData.T1))}
+              />
             </div>
             <div className="w-max mx-auto">
               <p className=" text-center">T2</p>
-              <Guage value={Number(sensorData.T2)} color={"#00008B"} />
+              <Guage
+                value={Number(sensorData.T2)}
+                color={guageColor(Number(sensorData.T2))}
+              />
             </div>
             <div className="w-max mx-auto">
               <p className=" text-center">T3</p>
-              <Guage value={Number(sensorData.T3)} color={"red"} />
+              <Guage
+                value={Number(sensorData.T3)}
+                color={guageColor(Number(sensorData.T3))}
+              />
             </div>
             <div className="w-max mx-auto">
               <p className=" text-center">F1</p>
-              <Guage value={Number(sensorData.F1)} color={"#A020F0"} />
+              <Guage
+                value={Number(sensorData.F1)}
+                color={guageColor(Number(sensorData.F1))}
+              />
             </div>
             <div className="w-max mx-auto">
               <p className=" text-center">F2</p>
-              <Guage value={Number(sensorData.F2)} color={"#17e5fb"} />
+              <Guage
+                value={Number(sensorData.F2)}
+                color={guageColor(Number(sensorData.F2))}
+              />
             </div>
             <div className="w-max mx-auto">
               <p className=" text-center">F3</p>
-              <Guage value={Number(sensorData.F3)} color={"green"} />
+              <Guage
+                value={Number(sensorData.F3)}
+                color={guageColor(Number(sensorData.F3))}
+              />
             </div>
           </div>
           <div className="">
             <div className=" grid grid-cols-3 gap-y-10 pt-14 w-[80%] mx-auto">
               <div className="w-max mx-auto">
                 <p className=" text-center">M1</p>
-                <Guage value={Number(sensorData.M1)} color={"#fb934e"} />
+                <Guage
+                  value={Number(sensorData.M1)}
+                  color={guageColor(Number(sensorData.M1))}
+                />
               </div>
               <div className="mx-auto mt-[50%] w-max">
                 {sensorState ? (
                   <button
-                    className=" rounded-[10rem] bg-[red] text-white font-semibold text-lg px-5 py-3"
+                    className=" rounded-[10rem] bg-[#ff0000] text-white font-semibold text-lg px-5 py-3"
                     onClick={() => changeSensorState(false)}
                   >
                     {loading ? "loading..." : "STOP"}
@@ -170,21 +214,30 @@ export default function Home() {
               </div>
               <div className="w-max mx-auto">
                 <p className=" text-center">M2</p>
-                <Guage value={Number(sensorData.M2)} color={"#4f5354"} />
+                <Guage
+                  value={Number(sensorData.M2)}
+                  color={guageColor(Number(sensorData.M2))}
+                />
               </div>
               <div className="w-max mx-auto">
                 <p className=" text-center">H1</p>
-                <Guage value={Number(sensorData.H1)} color={"#1748fb"} />
+                <Guage
+                  value={Number(sensorData.H1)}
+                  color={guageColor(Number(sensorData.H1))}
+                />
               </div>
               <div></div>
               <div className="w-max mx-auto">
                 <p className=" text-center">H2</p>
-                <Guage value={Number(sensorData.H2)} color={"#91fbf8"} />
+                <Guage
+                  value={Number(sensorData.H2)}
+                  color={guageColor(Number(sensorData.H2))}
+                />
               </div>
             </div>
           </div>{" "}
         </div>
-        <div className="col-span-12 lg:col-span-8 w-full pt-20 px-20 font-rubik pb-20">
+        <div className="col-span-12 lg:col-span-9 w-full pt-20 px-20 font-rubik pb-20">
           <Table data={sensorDataList} headers={headers} />
           <div className="pt-10 h-[50vh]">
             <BasicChart data={sensorDataList} />
