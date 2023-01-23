@@ -114,29 +114,19 @@ export default function Home() {
     if (guageValue > 900) {
       return "#ff0000";
     } else if (guageValue > 800) {
-      return "#ff8400";
-    } else if (guageValue > 700) {
-      return "#ffd900";
+      return "#ffc0cb";
     } else if (guageValue > 600) {
-      return "#ffff00";
-    } else if (guageValue > 500) {
-      return "#c8ff00";
+      return "#800080";
     } else if (guageValue > 400) {
-      return "#00ff1a";
-    } else if (guageValue > 300) {
-      return "#00f2ff";
-    } else if (guageValue > 200) {
-      return "#00aeff";
-    } else if (guageValue > 100) {
-      return "#0044ff";
-    } else return "#c0cbe9";
+      return "#0000ff";
+    } else return "#008000";
   };
 
   return (
     <>
       <Head>
         <title>LegSense</title>
-        <meta name="description" content="Created by Psami" />
+        <meta name="description" content="Legsense data" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
