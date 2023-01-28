@@ -17,7 +17,7 @@ export interface TableData {
 
 interface TableProps {
   headers: any[];
-  data: TableData[];
+  data: any[];
   loading?: boolean;
 }
 
