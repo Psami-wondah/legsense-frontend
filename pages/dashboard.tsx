@@ -146,65 +146,87 @@ export default function Home() {
   const [sensorDataList, setSensorDataList] = useState<typeof sensorData[]>([]);
 
   useEffect(() => {
-    setAnalyticsData([
-      {
-        variable: "Mean/Average",
-        T1: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.T1), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        T2: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.T2), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        T3: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.T3), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        F1: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.F1), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        F2: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.F2), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        F3: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.F3), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        M1: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.M1), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        M2: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.M2), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        H1: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.H1), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-        H2: (
-          sensorDataList.reduce((prev, curr) => prev + Number(curr.H2), 0) /
-          sensorDataList.length
-        ).toFixed(1),
-      },
-      {
-        variable: "Peak/Maximum",
-        T1: String(Math.max(...sensorDataList.map((item) => Number(item.T1)))),
-        T2: String(Math.max(...sensorDataList.map((item) => Number(item.T2)))),
-        T3: String(Math.max(...sensorDataList.map((item) => Number(item.T3)))),
-        F1: String(Math.max(...sensorDataList.map((item) => Number(item.F1)))),
-        F2: String(Math.max(...sensorDataList.map((item) => Number(item.F2)))),
-        F3: String(Math.max(...sensorDataList.map((item) => Number(item.F3)))),
-        M1: String(Math.max(...sensorDataList.map((item) => Number(item.M1)))),
-        M2: String(Math.max(...sensorDataList.map((item) => Number(item.M2)))),
-        H1: String(Math.max(...sensorDataList.map((item) => Number(item.H1)))),
-        H2: String(Math.max(...sensorDataList.map((item) => Number(item.H2)))),
-      },
-    ]);
-  }, [sensorDataList]);
+    if (!sensorState) {
+      setAnalyticsData([
+        {
+          variable: "Mean/Average",
+          T1: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.T1), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          T2: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.T2), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          T3: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.T3), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          F1: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.F1), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          F2: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.F2), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          F3: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.F3), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          M1: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.M1), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          M2: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.M2), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          H1: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.H1), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+          H2: (
+            sensorDataList.reduce((prev, curr) => prev + Number(curr.H2), 0) /
+            sensorDataList.length
+          ).toFixed(1),
+        },
+        {
+          variable: "Peak/Maximum",
+          T1: String(
+            Math.max(...sensorDataList.map((item) => Number(item.T1)))
+          ),
+          T2: String(
+            Math.max(...sensorDataList.map((item) => Number(item.T2)))
+          ),
+          T3: String(
+            Math.max(...sensorDataList.map((item) => Number(item.T3)))
+          ),
+          F1: String(
+            Math.max(...sensorDataList.map((item) => Number(item.F1)))
+          ),
+          F2: String(
+            Math.max(...sensorDataList.map((item) => Number(item.F2)))
+          ),
+          F3: String(
+            Math.max(...sensorDataList.map((item) => Number(item.F3)))
+          ),
+          M1: String(
+            Math.max(...sensorDataList.map((item) => Number(item.M1)))
+          ),
+          M2: String(
+            Math.max(...sensorDataList.map((item) => Number(item.M2)))
+          ),
+          H1: String(
+            Math.max(...sensorDataList.map((item) => Number(item.H1)))
+          ),
+          H2: String(
+            Math.max(...sensorDataList.map((item) => Number(item.H2)))
+          ),
+        },
+      ]);
+    }
+  }, [sensorDataList, sensorState]);
   const [loading, setLoading] = useState(false);
 
   const getSensorDataList = async () => {
@@ -393,9 +415,21 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className=" w-max mx-auto pb-20">
-        <Table data={analyticsData} headers={analyticsHeaders} />
-      </div>
+      {sensorDataList.length > 0 && !sensorState ? (
+        <div className=" w-max mx-auto pb-20 text-center">
+          <p className="font-bold uppercase">Analysis</p>
+          <p>
+            Summary of sensor statistics after{" "}
+            {(new Date(sensorDataList[0]?.date_added).getTime() -
+              new Date(
+                sensorDataList[sensorDataList.length - 1]?.date_added
+              ).getTime()) /
+              1000}{" "}
+            seconds
+          </p>
+          <Table data={analyticsData} headers={analyticsHeaders} />
+        </div>
+      ) : null}
     </>
   );
 }
