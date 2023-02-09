@@ -271,6 +271,11 @@ export default function Home() {
       return "#0000ff";
     } else return "#008000";
   };
+  console.log(new Date(sensorDataList[0]?.date_added), "top");
+  console.log(
+    new Date(sensorDataList[sensorDataList.length - 1]?.date_added),
+    "bottom"
+  );
 
   return (
     <>
@@ -282,7 +287,7 @@ export default function Home() {
       </Head>
       <div className="w-max m-auto">
         <h1 className=" text-2xl font-rubik font-bold">
-          PLANAR PRESSURE DISTRIBUTION
+          PLANTAR PRESSURE DISTRIBUTION
         </h1>
         <p>
           FOR: <span className=" font-bold font-rubik uppercase">{name}</span>
@@ -420,11 +425,12 @@ export default function Home() {
           <p className="font-bold uppercase">Analysis</p>
           <p>
             Summary of sensor statistics after{" "}
-            {(new Date(sensorDataList[0]?.date_added).getTime() -
-              new Date(
-                sensorDataList[sensorDataList.length - 1]?.date_added
-              ).getTime()) /
-              1000}{" "}
+            {Math.abs(
+              new Date(sensorDataList[0]?.date_added).getTime() -
+                new Date(
+                  sensorDataList[sensorDataList.length - 1]?.date_added
+                ).getTime()
+            ) / 1000}{" "}
             seconds
           </p>
           <Table data={analyticsData} headers={analyticsHeaders} />

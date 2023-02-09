@@ -62,7 +62,7 @@ export default function Index() {
     <>
       <div className="w-max m-auto text-center mt-[10vh] font-rubik">
         <h1 className=" text-3xl font-rubik font-bold">
-          DIGITAL PLANAR PRESSURE ESTIMATION DEVICE (DPPE)
+          DIGITAL PLANTAR PRESSURE <br /> ESTIMATOR (DPPE)
         </h1>
 
         <div className="pt-10">
