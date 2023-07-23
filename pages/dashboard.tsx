@@ -143,7 +143,9 @@ export default function Home() {
 
   const [analyticsData, setAnalyticsData] = useState<Analytics[]>([]);
 
-  const [sensorDataList, setSensorDataList] = useState<typeof sensorData[]>([]);
+  const [sensorDataList, setSensorDataList] = useState<(typeof sensorData)[]>(
+    []
+  );
 
   useEffect(() => {
     if (!sensorState) {
@@ -411,6 +413,36 @@ export default function Home() {
                 DONE
               </button>
             </div>
+            {sensorState ? null : (
+              <div className="flex gap-x-4">
+                <div>
+                  <button
+                    className=" rounded-[10rem] bg-gray-200 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
+                    onClick={() =>
+                      setSensorData({
+                        ...analyticsData[0],
+                        date_added: new Date(),
+                      })
+                    }
+                  >
+                    VIEW AVERAGE
+                  </button>
+                </div>
+                <div>
+                  <button
+                    className=" rounded-[10rem] bg-gray-400 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
+                    onClick={() =>
+                      setSensorData({
+                        ...analyticsData[1],
+                        date_added: new Date(),
+                      })
+                    }
+                  >
+                    VIEW PEAK
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="col-span-12 lg:col-span-9 w-full pt-20 px-20 font-rubik pb-20">
