@@ -417,7 +417,7 @@ export default function Home() {
               <div className="flex gap-x-4">
                 <div>
                   <button
-                    className=" rounded-[10rem] bg-gray-200 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
+                    className=" rounded-[10rem] bg-lime-900 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
                     onClick={() =>
                       setSensorData({
                         ...analyticsData[0],
@@ -430,7 +430,7 @@ export default function Home() {
                 </div>
                 <div>
                   <button
-                    className=" rounded-[10rem] bg-gray-400 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
+                    className=" rounded-[10rem] bg-gray-500 text-white font-semibold text-lg px-5 py-3 hover:opacity-40 transition[opacity] duration-150 ease-out"
                     onClick={() =>
                       setSensorData({
                         ...analyticsData[1],
